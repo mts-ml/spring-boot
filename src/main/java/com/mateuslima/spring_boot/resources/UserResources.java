@@ -13,7 +13,7 @@ public class UserResources {
 
     @GetMapping
     public ResponseEntity<User> findAll() {
-        User user = new User(1L, "Mel", "mel@gmail.com", "999999999", "123456");
+        User user = new User("Mel", "mel@gmail.com", "999999999", "123456");
 
         return ResponseEntity.ok().body(user);
     }
