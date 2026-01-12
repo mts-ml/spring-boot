@@ -1,11 +1,14 @@
 package com.mateuslima.spring_boot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mateuslima.spring_boot.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -21,6 +24,9 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
 
     public Order() {
@@ -54,12 +60,16 @@ public class Order implements Serializable {
         if (orderStatus != null) this.orderStatus = orderStatus.getCode();
     }
 
-    public User getUser() {
+    public User getClient() {
         return client;
     }
 
-    public void setUser(User client) {
+    public void setClient(User client) {
         this.client = client;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
 
