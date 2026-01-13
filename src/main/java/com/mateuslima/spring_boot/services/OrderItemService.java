@@ -6,12 +6,11 @@ import com.mateuslima.spring_boot.repositories.OrderItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderItemService implements Serializable {
+public class OrderItemService {
 
     @Autowired
     private OrderItemRepository orderItemRepository;
