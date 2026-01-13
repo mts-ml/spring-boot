@@ -1,6 +1,5 @@
 package com.mateuslima.spring_boot.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mateuslima.spring_boot.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
