@@ -15,7 +15,7 @@ import com.mateuslima.spring_boot.entities.pk.OrderItemPK;
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
 
-    @EmbeddedId
+    @EmbeddedId // Usa uma chave primária composta encapsulada em OrderItemPK (@Embeddable)
     private OrderItemPK id = new OrderItemPK();
 
     private Integer quantity;
@@ -32,6 +32,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+
     @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
@@ -41,7 +42,6 @@ public class OrderItem implements Serializable {
         id.setOrder(order);
     }
 
-    @JsonIgnore
     public Product getProduct() {
         return id.getProduct();
     }
