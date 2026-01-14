@@ -1,5 +1,6 @@
 package com.mateuslima.spring_boot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -42,6 +43,7 @@ public class Payment implements Serializable {
         this.moment = moment;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return order;
     }
