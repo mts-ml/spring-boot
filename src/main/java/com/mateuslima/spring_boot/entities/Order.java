@@ -29,7 +29,7 @@ public class Order implements Serializable {
 
     @OneToOne(
             mappedBy = "order",
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL // Order e Payment tem o mesmo 'id'. Payment depende do ciclo de vida de Order, então propagamos (persist/remove).
     )
     private Payment payment;
 
