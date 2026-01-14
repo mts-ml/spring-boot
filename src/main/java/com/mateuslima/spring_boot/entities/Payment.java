@@ -17,7 +17,7 @@ public class Payment implements Serializable {
     private Instant moment;
 
     @OneToOne
-    @MapsId
+    @MapsId // Compartilha o 'id', no caso, com Order.
     private Order order;
 
 
