@@ -2,6 +2,7 @@ package com.mateuslima.spring_boot.services;
 
 import com.mateuslima.spring_boot.entities.User;
 import com.mateuslima.spring_boot.repositories.UserRepository;
+import com.mateuslima.spring_boot.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class UserService {
     public User findById(Long id) {
         Optional<User> obj = userRepository.findById(id);
 
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User obj) {
