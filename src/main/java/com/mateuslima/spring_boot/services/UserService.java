@@ -4,6 +4,7 @@ import com.mateuslima.spring_boot.entities.User;
 import com.mateuslima.spring_boot.repositories.UserRepository;
 import com.mateuslima.spring_boot.services.exceptions.DatabaseException;
 import com.mateuslima.spring_boot.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -45,16 +46,19 @@ public class UserService {
     }
 
     public User update(Long id, User obj) {
-        User entity = userRepository.getReferenceById(id);
+        try {
+            User entity = userRepository.getReferenceById(id);
         /*  Retorna um proxy* gerenciado pelo JPA, sem acessar o banco imediatamente.
         O acesso ao banco ocorre apenas se algum atributo for utilizado.
         É comum em operações de update, pois evita uma consulta desnecessária.  */
 
-        // Proxy é um objeto falso/intermediário, criado pelo Hibernate, que representa a entidade real, mas sem carregar os dados do banco ainda.
+            // Proxy é um objeto falso/intermediário, criado pelo Hibernate, que representa a entidade real, mas sem carregar os dados do banco ainda.
 
-        updateData(entity, obj);
-
-        return userRepository.save(entity);
+            updateData(entity, obj);
+            return userRepository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
 
